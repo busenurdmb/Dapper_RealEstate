@@ -1,0 +1,11 @@
+﻿ public async Task<bool> Delete(int id)
+        {
+        string query = $"DELETE FROM {_tableName} WHERE {_tableName}ID = @Id";
+
+            using (var connection = _context.CreateConnection())
+            {
+                connection.Open();
+                int rowsAffected = await connection.ExecuteAsync(query, new { Id = id });
+                return rowsAffected > 0;
+            }
+        }
